@@ -85,27 +85,17 @@ beta_PD_pixeles<-phylosor(marco1,aves_iucn)
 ####Perform a cluster analysis and plot a similitude dendrogram between pixels. Clustering can be donde using one of several methods: "average","single","complete","ward.D","weighted"
 CLUSTER1=hclust(1-beta_PD_pixeles,  method ="ward")
 plot(CLUSTER1)
-####Aqui como visualizar el recambio?
-#betapd_ras<-grilla
-betapd_ras2<-grilla
-#values(betapd_ras)<-NA #se eliminan todos los valores del modelo de distribución
-values(betapd_ras2)<-NA
-#2- Asignar al raster los valores de PD que corresponden a cada pixel
-#prueba2<-identify(CLUSTER1) 
-#otra opcion es no seleccionar los grupos sino el numero de grupos (falta probar)
-prueba3<-cutree(CLUSTER1, k = 20, h = NULL)
-#for(i in 1:length(prueba2)){
-#betapd_ras[as.numeric(names(prueba2[[i]]))]<-i
-#}
 
-#plot(betapd_ras)
-
-betapd_ras2[as.numeric(names(prueba3))]<-prueba3[names(prueba3)]
-plot(betapd_ras2)
-rect.hclust(CLUSTER1,k=20,border="blue")
+##### Selecting the number of groups to use in the determination of evolutionary units (k).
+groups<-20
+###Plotting the selected groups on the dendrogram
+rect.hclust(CLUSTER1,k=groups,border="blue")
+###Plotting groups in a map
+group_ras<-grilla
+values(group_ras)<-NA
+part_dendrogram<-cutree(CLUSTER1, k = gropus, h = NULL)
+group_ras[as.numeric(names(part_dendrogram))]<-prueba3[names(part_dendrogram)]
+plot(group_ras)
+ 
 
 
-
-######Visualizar similitud evolutiva entre las áreas predefenidas mediante otros métodos##########
-CLUSTERX=hclust(1-beta_PD,  method ="ward")
-plot(CLUSTERX)
