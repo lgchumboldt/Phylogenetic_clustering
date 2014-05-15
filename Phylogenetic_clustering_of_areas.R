@@ -69,7 +69,7 @@ grilla[1:ncell(grilla)]<-1:ncell(grilla)
 Stack_grilla<-stack(grilla,Stack_grilla)
 marco<-as.data.frame(Stack_grilla)
 marco<-na.omit(marco)
-write.table(marco,"comunidades_aves_0_1.txt")
+write.table(marco,"bird_communities_0_1.txt")
 
 ###########################################################################################
 ####Generation of evolutionary informed groups according to similarity between pixels######
@@ -82,7 +82,8 @@ marco1<-marco[,2:length(marco)]
 rownames(marco1)<-marco[,1]
 ####Generate a distance matrix between all pixels. This can be done using several different functions: phylosor, unifrac seacrh for more
 beta_PD_pixeles<-phylosor(marco1,aves_iucn)
-####Perform a cluster analysis and plot a similitude dendrogram between pixels. Clustering can be donde using one of several methods: "average","single","complete","ward.D","weighted"
+####Perform a cluster analysis and plot a similitude dendrogram between pixels. Clustering can be done using one of several methods: "average","single","complete","ward.D","weighted"
+		####In the case of phylosor we use 1-distance since the function computes a measure where 1 means equal and 0 completely different 
 CLUSTER1=hclust(1-beta_PD_pixeles,  method ="ward")
 plot(CLUSTER1)
 
@@ -96,6 +97,6 @@ values(group_ras)<-NA
 part_dendrogram<-cutree(CLUSTER1, k = gropus, h = NULL)
 group_ras[as.numeric(names(part_dendrogram))]<-prueba3[names(part_dendrogram)]
 plot(group_ras)
- 
+ writeRaster(group_ras,paste(groups,"groups.asc",sep=""))
 
 
