@@ -82,9 +82,11 @@ marco1<-marco[,2:length(marco)]
 rownames(marco1)<-marco[,1]
 ####Generate a distance matrix between all pixels. This can be done using several different functions: phylosor, unifrac seacrh for more
 beta_PD_pixeles<-phylosor(marco1,aves_iucn)
+matriz_beta_pd_phylosor<-as.matrix(beta_PD_pixeles)
+write.table(matriz_beta_pd_phylosor,"phylosor_0_1.txt")
 ####Perform a cluster analysis and plot a similitude dendrogram between pixels. Clustering can be done using one of several methods: "average","single","complete","ward.D","weighted"
 		####In the case of phylosor we use 1-distance since the function computes a measure where 1 means equal and 0 completely different 
-CLUSTER1=hclust(1-beta_PD_pixeles,  method ="ward")
+CLUSTER1=hclust(1-beta_PD_pixeles,  method ="ward.D")
 plot(CLUSTER1)
 
 ##### Selecting the number of groups to use in the determination of evolutionary units (k).
