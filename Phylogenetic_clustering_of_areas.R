@@ -95,7 +95,7 @@ rect.hclust(CLUSTER1,k=groups,border="blue")
 group_ras<-grilla
 values(group_ras)<-NA
 part_dendrogram<-cutree(CLUSTER1, k = gropus, h = NULL)
-group_ras[as.numeric(names(part_dendrogram))]<-prueba3[names(part_dendrogram)]
+group_ras[as.numeric(names(part_dendrogram))]<-part_dendrogram[names(part_dendrogram)]
 plot(group_ras)
  writeRaster(group_ras,paste(groups,"groups.asc",sep=""))
 
