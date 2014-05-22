@@ -76,7 +76,7 @@ write.table(marco,"bird_communities_0_1.txt")
 ###########################################################################################
 
 
-#metodos=c("average","single","complete","ward","weighted")
+#metodos= "ward.D", "ward.D2", "single", "complete", "average" (= UPGMA), "mcquitty" (= WPGMA), "median" (= WPGMC) or "centroid" (= UPGMC)
 
 marco1<-marco[,2:length(marco)]
 rownames(marco1)<-marco[,1]
