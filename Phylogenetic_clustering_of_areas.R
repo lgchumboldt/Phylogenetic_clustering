@@ -3,6 +3,7 @@ library(maptools)
 library(raster)
 library(rgdal)
 library(picante)
+library(clustsig)
 ###Set working directory###
 setwd("C:\\Users\\GIC 66\\Documents\\Andrea\\filodiversidad\\Beta_filodiversidad\\distribuciones_aves")
 ###Load phylogeny###
@@ -100,5 +101,14 @@ part_dendrogram<-cutree(CLUSTER1, k = gropus, h = NULL)
 group_ras[as.numeric(names(part_dendrogram))]<-part_dendrogram[names(part_dendrogram)]
 plot(group_ras)
  writeRaster(group_ras,paste(groups,"groups.asc",sep=""))
-
+ 
+ ######How to statistically determine the optimum number of groups
+ 
+ 
+simprof(marco1, num.expected=1000, num.simulated=999,
+method.cluster="ward.D", method.distance=unifrac(marco1,aves_iucn),
+method.transform="identity", alpha=0.05,
+sample.orientation="row", const=0,
+silent=TRUE, increment=100,
+undef.zero=TRUE, warn.braycurtis=TRUE)
 
