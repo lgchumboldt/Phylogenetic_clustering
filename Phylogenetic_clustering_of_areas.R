@@ -104,9 +104,9 @@ plot(group_ras)
  
  ######How to statistically determine the optimum number of groups
  
- 
+ phylo_dist<-function(X,phylo=aves_iucn){unifrac(comm=X,tree=aves_iucn)}
 simprof(marco1, num.expected=1000, num.simulated=999,
-method.cluster="ward.D", method.distance=unifrac(marco1,aves_iucn),
+method.cluster="ward.D", method.distance=phylo_dist,
 method.transform="identity", alpha=0.05,
 sample.orientation="row", const=0,
 silent=TRUE, increment=100,
