@@ -1,3 +1,5 @@
+###Written by Andrea Paz#####
+
 ###load packages###
 library(maptools)
 library(raster)
